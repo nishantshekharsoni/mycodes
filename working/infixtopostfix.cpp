@@ -1,3 +1,5 @@
+//Nishant shekhar soni
+//infinix to postfix
 #include <iostream>
 #include <stack>
 using namespace std;
@@ -11,7 +13,7 @@ int checkPrecedence(char c);
 int main()
 {
     string s = "A+B*C-D*E";
-    cout << infixToPostfix(s);
+    cout << "Your answer is ::  " << infixToPostfix(s) << endl;
     return 0;
 }
 
@@ -46,7 +48,6 @@ string infixToPostfix(string s)
                 else
                 {
                     st.push(s[i]);
-                    cout << "push operator :: " << s[i] << endl;
                 }
             }
         }
