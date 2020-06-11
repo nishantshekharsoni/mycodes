@@ -83,4 +83,5 @@ int checkPrecedence(char c)
 
     else if (c == '*' || c == '/')
         return 2;
+    return -1;
 }
