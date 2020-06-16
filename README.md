@@ -1,2 +1,2 @@
 # mycodes
-cods during learning.
+codes during learning.
