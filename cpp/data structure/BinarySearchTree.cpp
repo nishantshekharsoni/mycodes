@@ -1,7 +1,11 @@
-/*  code :Binary search tree with class
+/*  
+    code :Binary search tree with class
+    operation: insert, find , min , max
     Author: Nishant Shekhar Soni
     Date : 18th june 2020 23:24 pm
     learning source: youtube.com/mycodeschool
+    Note:here two versions of functions you found one private which
+        uses root pointer and one for public which is simple
 */
 #include <iostream>
 using namespace std;
@@ -16,15 +20,16 @@ private:
         Node *left;
         Node *right;
     };
+
     //root node
     Node *rootptr = NULL;
-
 
     //get root
     Node *getRoot()
     {
         return rootptr;
     }
+
     //set root
     void setRoot(Node *temp)
     {
@@ -87,15 +92,57 @@ private:
             return search(val, root->right);
         }
     }
-public:
 
+    //for minimum and maximum value in tree
+
+    int minAndMax(Node *root, char choice)
+    {
+        //value of choice 'n' for minimum and 'x' for maximum
+        if (choice == 'n')
+        {  
+            if(root -> left == NULL){
+                return root->data;
+            } 
+            return minAndMax(root->left, choice); //for min
+        }
+        else
+        {
+            if(root -> right == NULL){
+                return root->data;
+            } 
+            return minAndMax(root->right, choice); //for max
+        }
+    }
+
+public:
     void insert(int val)
     {
         setRoot(insertNode(val, getRoot()));
     }
+
     bool find(int val)
     {
-        return search(val , getRoot());
+        return search(val, getRoot());
+    }
+
+    int min()
+    {
+        if (getRoot() == NULL)
+        {
+            cout << "ERROR :: tree is empity" << endl;
+            return -1;
+        }
+        return minAndMax(getRoot(), 'n');
+    }
+
+    int max()
+    {
+        if (getRoot() == NULL)
+        {
+            cout << "ERROR :: tree is empity" << endl;
+            return -1;
+        }
+        return minAndMax(getRoot(), 'x');
     }
 };
 
@@ -109,13 +156,16 @@ int main()
     t.insert(8);
     t.insert(12);
 
-    cout<<"is 8 is there ::  "<<t.find(15)<<endl;
-    cout<<"is 10 is there ::  "<<t.find(10)<<endl;
-    cout<<"is 12 is there ::  "<<t.find(12)<<endl;
+    cout << "is 8 is there ::  " << t.find(8) << endl;
+    cout << "is 10 is there ::  " << t.find(10) << endl;
+    cout << "is 12 is there ::  " << t.find(12) << endl;
 
-    cout<<"is 4 is there ::  "<<t.find(4)<<endl;
-    cout<<"is 644 is there ::  "<<t.find(644)<<endl;
-    cout<<"is 836 is there ::  "<<t.find(836)<<endl;
+    cout << "is 4 is there ::  " << t.find(4) << endl;
+    cout << "is 644 is there ::  " << t.find(644) << endl;
+    cout << "is 836 is there ::  " << t.find(836) << endl;
+
+    cout << "minimum number in the tree is " << t.min() << endl;
+    cout << "maximum number in the tree is " << t.max() << endl;
 
     return 0;
 }
