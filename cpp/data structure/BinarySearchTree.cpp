@@ -94,24 +94,44 @@ private:
     }
 
     //for minimum and maximum value in tree
-
     int minAndMax(Node *root, char choice)
     {
         //value of choice 'n' for minimum and 'x' for maximum
         if (choice == 'n')
-        {  
-            if(root -> left == NULL){
+        {
+            if (root->left == NULL)
+            {
                 return root->data;
-            } 
+            }
             return minAndMax(root->left, choice); //for min
         }
         else
         {
-            if(root -> right == NULL){
+            if (root->right == NULL)
+            {
                 return root->data;
-            } 
+            }
             return minAndMax(root->right, choice); //for max
         }
+    }
+
+    int maxOfTwoNumbers(int a , int b){
+        return (a >= b)? a : b;
+    }
+
+    int heightBST(Node *root)
+    {   
+        if (root == NULL){
+            return -1; //base case
+        }else{
+            cout<<"data :: "<<root->data<<endl;
+        }
+        
+        int leftHeight = heightBST(root->left);
+        int rightHeight = heightBST(root->right);
+        
+        
+        return maxOfTwoNumbers(leftHeight, rightHeight)+1;
     }
 
 public:
@@ -144,20 +164,27 @@ public:
         }
         return minAndMax(getRoot(), 'x');
     }
+
+    int height(){
+        return heightBST(getRoot());
+    }
 };
 
 int main()
 {
     BST t;
     t.insert(15);
-    t.insert(10);
-    t.insert(20);
-    t.insert(25);
-    t.insert(8);
+    t.insert(9);
+    t.insert(23);
+    t.insert(3);
     t.insert(12);
+    t.insert(8);
+    t.insert(17);
+    t.insert(23);
+
 
     cout << "is 8 is there ::  " << t.find(8) << endl;
-    cout << "is 10 is there ::  " << t.find(10) << endl;
+    cout << "is 23 is there ::  " << t.find(23) << endl;
     cout << "is 12 is there ::  " << t.find(12) << endl;
 
     cout << "is 4 is there ::  " << t.find(4) << endl;
@@ -166,6 +193,8 @@ int main()
 
     cout << "minimum number in the tree is " << t.min() << endl;
     cout << "maximum number in the tree is " << t.max() << endl;
+
+    cout << "Height of a tree is ::  " << t.height() << endl;
 
     return 0;
 }
